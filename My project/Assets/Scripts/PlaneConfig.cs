@@ -5,13 +5,20 @@ using UnityEngine.UI;
 
 public class PlaneConfig : MonoBehaviour
 {
+    [SerializeField]
     public Image cardImage, chaosSymbol;
+    [SerializeField]
     public TMPro.TMP_Text title, desc, chaos;
+
+    [Header("Deck and Cards")]
+    [SerializeField]
+    private Card currentPlane;
+    private Card lastPlane;
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(ChaosEnsues());
+        
     }
 
     // Update is called once per frame
@@ -19,6 +26,12 @@ public class PlaneConfig : MonoBehaviour
     {
         
     }
+
+    public void Planeswalk()
+    {
+
+    }
+
 
     float time;
     private IEnumerator ChaosEnsues()
