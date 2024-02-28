@@ -1,12 +1,18 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 
-public class Deck
+public class Deck : MonoBehaviour
 {
     private List<Card> list;
     private Card currentCard;
+
+    void Start()
+    {
+        //TODO: singleton yourself
+    }
 
     public void Initialize()
     {
@@ -28,7 +34,23 @@ public class Deck
         return currentCard;
     }
 
+
+    //fisher yates shuffle off the internet, looks like O(n^2) | https://stackoverflow.com/questions/273313/randomize-a-listt 
+
+    /*
+    someone else said:
+
+    "As people have pointed out in the comments, GUIDs are not
+    guaranteed to be random, so we should be using a real random
+    number generator instead:"
+
     private static Random rng = new Random();
+    ...
+    var shuffledcards = cards.OrderBy(_ => rng.Next()).ToList();
+
+    */
+
+    private static System.Random rng = new System.Random();
     public void Shuffle()
     {
         int n = list.Count, k;
