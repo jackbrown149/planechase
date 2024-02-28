@@ -29,7 +29,8 @@ public class PlaneConfig : MonoBehaviour
 
     public void Planeswalk()
     {
-
+        //
+        //currentPlane = deck.DrawTopCard()
     }
 
 

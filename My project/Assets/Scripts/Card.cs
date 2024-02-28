@@ -3,14 +3,14 @@ using System.Collections.Generic;
 
 public class Card
 {
-    string title, imgLink, planeText, chaosText;
-    bool imgLocal; // true if the app should attempt to find it without making a web request
+    public string title, imgLink, planeText, chaosText;
+    public bool imgLocal; // true if the app should attempt to find it without making a web request
 
-    public Card(string title, string imgLink, string oracleText, string chaosText, bool imgLocal)
+    public Card(string title, string imgLink, string planeText, string chaosText, bool imgLocal)
     {
         this.title = title;
         this.imgLink = imgLink;
-        this.oracleText = oracleText;
+        this.planeText = planeText;
         this.chaosText = chaosText;
         this.imgLocal = imgLocal;
     }
