@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class PlaneConfig : MonoBehaviour
 {
     [SerializeField]
-    public Image cardImage, pwSymbol, chaosSymbol;
+    private Image cardImage, pwSymbol, chaosSymbol;
     [SerializeField]
-    public TMPro.TMP_Text title, desc, chaos;
+    private TMPro.TMP_Text title, desc, chaos;
 
     [Header("Deck and Cards")]
     [SerializeField]
@@ -39,8 +39,10 @@ public class PlaneConfig : MonoBehaviour
     private bool canPlaneswalk;
     public void Planeswalk()
     {
+        if (!canPlaneswalk) return;
+
         canPlaneswalk = false;
-        //StartCoroutine(PlaneswalkTransition(planeTransitionTime));
+        StartCoroutine(PlaneswalkTransition(planeTransitionTime));
         //
     }
 
@@ -53,7 +55,7 @@ public class PlaneConfig : MonoBehaviour
 
         yield return new WaitForSeconds(transitionTime);
         
-        currentPlane = deck.DrawTopCard();
+        //currentPlane = deck.DrawTopCard();
 
         //send away clouds;
         StartCoroutine(CloudsOut(transitionTime / 2f));
@@ -61,6 +63,7 @@ public class PlaneConfig : MonoBehaviour
         yield return new WaitForSeconds(transitionTime/2f + 0.1f);
         //brief uninteractable delay after clouds roll out
         canPlaneswalk = true;
+        print("finished card transition");
     }
 
     [Header("PlaneTransitionVariables")]
@@ -68,22 +71,57 @@ public class PlaneConfig : MonoBehaviour
     private float planeTransitionTime;
     private float cloudTimer;
     [SerializeField]
-    private GameObject cloudBottom, cloud1, cloud2, cloud3;
+    private RectTransform cloudBottom, cloud1, cloud2, cloud3;
     [SerializeField]
     private Vector2 cloudBottomStart, cloudBottomEnd,
         cloud1Start, cloud1End, cloud2Start, cloud2End, cloud3Start, cloud3End;
     private IEnumerator CloudsIn(float animDuration)
     {
         cloudTimer = 0;
-        while(cloudTimer < animDuration)
+        Vector2 temp = Vector2.zero;
+
+        while (cloudTimer < animDuration)
         {
-            cloudTimer+= Time.deltaTime;
+            temp = Vector2.Lerp(cloudBottomStart, cloudBottomEnd, cloudTimer / animDuration);
+            cloudBottom.localPosition = temp;
+
+            temp = Vector2.Lerp(cloud1Start, cloud1End, cloudTimer / animDuration);
+            cloud1.localPosition = temp;
+
+            temp = Vector2.Lerp(cloud2Start, cloud2End, cloudTimer / animDuration);
+            cloud2.localPosition = temp;
+
+            temp = Vector2.Lerp(cloud3Start, cloud3End, cloudTimer / animDuration);
+            cloud3.localPosition = temp;
+
+
+            cloudTimer += Time.deltaTime;
             yield return null;
         }
     }
     private IEnumerator CloudsOut(float animDuration) //copy CloudsIn in a bit
     {
-        yield return null;
+        cloudTimer = 0;
+        Vector2 temp = Vector2.zero;
+
+        while (cloudTimer < animDuration)
+        {
+            temp = Vector2.Lerp(cloudBottomEnd, cloudBottomStart, cloudTimer / animDuration);
+            cloudBottom.localPosition = temp;
+
+            temp = Vector2.Lerp(cloud1End, cloud1Start, cloudTimer / animDuration);
+            cloud1.localPosition = temp;
+
+            temp = Vector2.Lerp(cloud2End, cloud2Start, cloudTimer / animDuration);
+            cloud2.localPosition = temp;
+
+            temp = Vector2.Lerp(cloud3End, cloud3Start, cloudTimer / animDuration);
+            cloud3.localPosition = temp;
+
+
+            cloudTimer += Time.deltaTime;
+            yield return null;
+        }
     }
 
     float time;
