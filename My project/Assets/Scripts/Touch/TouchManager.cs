@@ -7,10 +7,12 @@ public class TouchManager : MonoBehaviour
 {
     private PlayerInput playerInput;
 
+    [SerializeField]
+    private PlaneConfig planeConfig;
+
     private InputAction touchPosAction, touchPressAction;
 
     private Vector2 pwPos, settingsPos;
-    [SerializeField]
     private float pwTolerance, settingsTolerance;
 
     private void Start()
@@ -46,6 +48,7 @@ public class TouchManager : MonoBehaviour
         {
             //the pressed the planeswalk symbol
             print("Pressed Planeswalk");
+            planeConfig.Planeswalk();
         }
         //in this order, if the touch is ambiguous read it as a settings press
 
