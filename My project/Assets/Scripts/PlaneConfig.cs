@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlaneConfig : MonoBehaviour
 {
     [SerializeField]
-    public Image cardImage, chaosSymbol;
+    public Image cardImage, pwSymbol, chaosSymbol;
     [SerializeField]
     public TMPro.TMP_Text title, desc, chaos;
 
@@ -18,7 +18,13 @@ public class PlaneConfig : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        print("Planeswalk Symbol position reads as "+pwSymbol.rectTransform.position);
+
+        GameManager.Instance.SetPWPos(
+            new Vector2(pwSymbol.rectTransform.position.x, pwSymbol.rectTransform.position.y));
+        GameManager.Instance.SetSettingsPos(
+            new Vector2(-999999,-999999)); //for now, but if we add a settings button we'll need this
+        GameManager.Instance.SetPWTolerance(80);
     }
 
     // Update is called once per frame
