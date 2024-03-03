@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using CsvHelper;
 
 public class GameManager : MonoBehaviour
 {
@@ -32,12 +33,19 @@ public class GameManager : MonoBehaviour
     {
         //yield return new WaitForSeconds(delay);
         yield return null; // a one frame delay is sufficient to know that every start has run
-
-        //grab singleton Deck.Instance, start running commands (over a few frames maybe)
-        //for each (rawcard)
-        //  if .legal
-        //      new card(rawcard.blah, .blah, .blah)
-        //      Deck.Instance.AddCard(newCard)
+        
+        //fetch all cards from the deck list and add them to our Deck instance
+        using (var reader = new StreamReader("DefaultDeck.csv"))
+        using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+        {
+            csv.Read();
+            csv.ReadHeader();
+            while (csv.Read())
+            {
+                newCard = new Card(csv.getTitle, csv.getSubtitle, csv.getImageID, csv.getPlaneText, csv.getChaosText);
+                Deck.Instance.AddCard(newCard);
+            }
+        }
     }
 
 
