@@ -13,7 +13,7 @@ public class Card
         this.imageID = imageID;
         this.planeText = planeText;
         this.chaosText = chaosText;
-        this.imgLocal = imgLocal;
+        //this.imgLocal = imgLocal;
     }
 
     public Card()
@@ -29,7 +29,7 @@ public class Card
     { this.subtitle = subtitle; }
     public string getSubtitle() { return this.subtitle; }
 
-    public void setImageID(byte.imageID)
+    public void setImageID(byte imageID)
     { this.imageID = imageID; }
     public byte getImageID() { return this.imageID;}
 
