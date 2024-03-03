@@ -33,11 +33,12 @@ public class GameManager : MonoBehaviour
     {
         //yield return new WaitForSeconds(delay);
         yield return null; // a one frame delay is sufficient to know that every start has run
-        
+
         //fetch all cards from the deck list and add them to our Deck instance
         using (var reader = new StreamReader("DefaultDeck.csv"))
         using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
         {
+            Card newCard;
             csv.Read();
             csv.ReadHeader();
             while (csv.Read())
