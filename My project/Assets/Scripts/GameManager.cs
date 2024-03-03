@@ -35,13 +35,13 @@ public class GameManager : MonoBehaviour
         yield return null; // a one frame delay is sufficient to know that every start has run
 
         //fetch all cards from the deck list and add them to our Deck instance
-        using (var reader = new StreamReader("DefaultDeck.csv"))
-        using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+        using (var reader = new System.IO.StreamReader("DefaultDeck.csv"))
+        using (var csv = new CsvReader(reader, System.Globalization.CultureInfo.InvariantCulture))
         {
             Card newCard;
             string newTitle;
             string newSubtitle;
-            byte newCardID;
+            byte newImageID;
             string newPlaneText;
             string newChaosText;
 
@@ -49,14 +49,14 @@ public class GameManager : MonoBehaviour
             csv.ReadHeader();
             while (csv.Read())
             {
-                newTitle = csv.getField<string>("title");
-                newsubtitle = csv.getField<string>("subtitle");
-                newCardID = csv.getField<byte>("cardID");
-                newPlaneText = csv.getField<string>("planeText");
-                newChaosText = csv.getField<string>("chaosText");
+                newTitle = csv.GetField<string>("title");
+                newSubtitle = csv.GetField<string>("subtitle");
+                newImageID = csv.GetField<byte>("imageID");
+                newPlaneText = csv.GetField<string>("planeText");
+                newChaosText = csv.GetField<string>("chaosText");
                 
                 newCard = new Card(newTitle, newSubtitle, newImageID, newPlaneText, newChaosText);
-                Deck.Instance.AddCard(newCard);
+                Deck.Instance.PutOnBottom(newCard);
             }
         }
     }
