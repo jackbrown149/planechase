@@ -15,11 +15,11 @@ public class GameManager : MonoBehaviour
         if(Instance == null)
         {
             Instance = this;
-            print("gained sentience...");
+            print("GameManager established");
         }
         else
         {
-            print("found out I was a clone and killed myself");
+            print("Duplicate GameManager culled");
             Destroy(this);
         }
 

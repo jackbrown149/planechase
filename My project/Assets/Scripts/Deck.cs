@@ -9,9 +9,20 @@ public class Deck : MonoBehaviour
     private List<Card> list;
     private Card currentCard;
 
+    public static Deck Instance;
+
     void Start()
     {
-        //TODO: singleton yourself
+        if (Instance == null)
+        {
+            Instance = this;
+            print("Deck created");
+        }
+        else
+        {
+            print("Duplicate deck created and culled");
+            Destroy(this);
+        }
     }
 
     public void Initialize()

@@ -17,7 +17,6 @@ public class PlaneConfig : MonoBehaviour
     [SerializeField]
     private Card currentPlane;
     private Card prevPlane;
-    private Deck deck;
 
     // Start is called before the first frame update
     void Start()
@@ -53,7 +52,7 @@ public class PlaneConfig : MonoBehaviour
     {
         title.text = currentPlane.title;
         subtitle.text = currentPlane.subtitle;
-        //cardImage.sprite = planeBG[currentPlane.imageID]
+        cardImage.sprite = planeBG[currentPlane.imageID];
         desc.text = currentPlane.planeText;
         chaos.text= currentPlane.chaosText;
     }
@@ -67,8 +66,8 @@ public class PlaneConfig : MonoBehaviour
 
         yield return new WaitForSeconds(transitionTime);
         
-        //currentPlane = deck.DrawTopCard();
-        //DisplayCard();
+        currentPlane = Deck.Instance.DrawTopCard();
+        DisplayCard();
 
         //send away clouds;
         StartCoroutine(CloudsOut(transitionTime / 2f));
