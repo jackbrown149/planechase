@@ -8,7 +8,10 @@ public class PlaneConfig : MonoBehaviour
     [SerializeField]
     private Image cardImage, pwSymbol, chaosSymbol;
     [SerializeField]
-    private TMPro.TMP_Text title, desc, chaos;
+    private TMPro.TMP_Text title, subtitle, desc, chaos;
+
+    [SerializeField]
+    private Sprite[] planeBG;
 
     [Header("Deck and Cards")]
     [SerializeField]
@@ -46,6 +49,15 @@ public class PlaneConfig : MonoBehaviour
         //
     }
 
+    private void DisplayCard()
+    {
+        title.text = currentPlane.title;
+        subtitle.text = currentPlane.subtitle;
+        //cardImage.sprite = planeBG[currentPlane.imageID]
+        desc.text = currentPlane.planeText;
+        chaos.text= currentPlane.chaosText;
+    }
+
     private IEnumerator PlaneswalkTransition(float transitionTime)
     {
         //bring in clouds
@@ -56,6 +68,7 @@ public class PlaneConfig : MonoBehaviour
         yield return new WaitForSeconds(transitionTime);
         
         //currentPlane = deck.DrawTopCard();
+        //DisplayCard();
 
         //send away clouds;
         StartCoroutine(CloudsOut(transitionTime / 2f));
