@@ -30,6 +30,20 @@ public class PlaneConfig : MonoBehaviour
         GameManager.Instance.SetPWTolerance(80);
 
         canPlaneswalk = true;
+
+        StartCoroutine(RequestDeckAfterDelay(3));
+    }
+
+    private IEnumerator RequestDeckAfterDelay(int delay)
+    {
+        for(int i = 0; i<delay; i++)
+        {
+            yield return null;
+        }
+        currentPlane = Deck.Instance.DrawTopCard();
+        DisplayCard();
+
+        StartCoroutine(CloudsOut(planeTransitionTime));
     }
 
     // Update is called once per frame
@@ -46,6 +60,7 @@ public class PlaneConfig : MonoBehaviour
         canPlaneswalk = false;
         StartCoroutine(PlaneswalkTransition(planeTransitionTime));
         //
+
     }
 
     private void DisplayCard()

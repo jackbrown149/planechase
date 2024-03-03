@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
         yield return null; // a one frame delay is sufficient to know that every start has run
 
         //fetch all cards from the deck list and add them to our Deck instance
-        using (var reader = new System.IO.StreamReader("DefaultDeck.csv"))
+        using (var reader = new System.IO.StreamReader("Assets/Scripts/DefaultDeck.csv"))
         using (var csv = new CsvReader(reader, System.Globalization.CultureInfo.InvariantCulture))
         {
             Card newCard;
@@ -59,6 +59,8 @@ public class GameManager : MonoBehaviour
                 Deck.Instance.PutOnBottom(newCard);
             }
         }
+
+        Deck.Instance.Shuffle();
     }
 
 

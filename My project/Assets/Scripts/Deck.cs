@@ -23,6 +23,7 @@ public class Deck : MonoBehaviour
             print("Duplicate deck created and culled");
             Destroy(this);
         }
+        Initialize();
     }
 
     public void Initialize()
