@@ -39,11 +39,23 @@ public class GameManager : MonoBehaviour
         using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
         {
             Card newCard;
+            string newTitle;
+            string newSubtitle;
+            byte newCardID;
+            string newPlaneText;
+            string newChaosText;
+
             csv.Read();
             csv.ReadHeader();
             while (csv.Read())
             {
-                newCard = new Card(csv.getTitle, csv.getSubtitle, csv.getImageID, csv.getPlaneText, csv.getChaosText);
+                newTitle = csv.getField<string>("title");
+                newsubtitle = csv.getField<string>("subtitle");
+                newCardID = csv.getField<byte>("cardID");
+                newPlaneText = csv.getField<string>("planeText");
+                newChaosText = csv.getField<string>("chaosText");
+                
+                newCard = new Card(newTitle, newSubtitle, newImageID, newPlaneText, newChaosText);
                 Deck.Instance.AddCard(newCard);
             }
         }
