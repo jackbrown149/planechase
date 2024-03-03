@@ -3,14 +3,14 @@ using System.Collections.Generic;
 
 public class Card
 {
-    public string title, subtitle, imgLink, planeText, chaosText;
-    public bool imgLocal; // true if the app should attempt to find it without making a web request
+    public string title, subtitle, planeText, chaosText;
+    public byte imageID;
 
-    public Card(string title, string subtitle, string imgLink, string planeText, string chaosText, bool imgLocal)
+    public Card(string title, string subtitle, byte imageID, string planeText, string chaosText)
     {
         this.title = title;
         this.subtitle = subtitle;
-        this.imgLink = imgLink;
+        this.imageID = imageID;
         this.planeText = planeText;
         this.chaosText = chaosText;
         this.imgLocal = imgLocal;
@@ -29,9 +29,9 @@ public class Card
     { this.subtitle = subtitle; }
     public string getSubtitle() { return this.subtitle; }
 
-    public void setImgLink(string imgLink)
-    { this.imgLink = imgLink; }
-    public string getImgLink() { return this.imgLink;}
+    public void setImageID(byte.imageID)
+    { this.imageID = imageID; }
+    public byte getImageID() { return this.imageID;}
 
     public void setPlaneText(string planeText)
     { this.planeText = planeText; }
@@ -40,8 +40,4 @@ public class Card
     public void setChaosText(string chaosText)
     { this.chaosText = chaosText; }
     public string getChaosText() { return this.chaosText; }
-
-    public void setImgLocal(bool imgLocal)
-    { this.imgLocal = imgLocal; }
-    public bool getImgLocal() { return this.imgLocal; }
 }

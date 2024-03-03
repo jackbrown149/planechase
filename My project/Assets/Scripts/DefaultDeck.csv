@@ -1,0 +1,11 @@
+title,subtitle,imageID,planeText,chaosText
+"Academy at Tolaria West","Plane - Dominaria",0,"At the beginning of your end step, if you have no cards in hand, draw seven cards.","Whenever chaos ensues, discard your hand."
+"Akoum","Plane - Zendikar",1,"Players may cast enchantment spells as though they had flash.","Whenever chaos ensues, destroy target creature that isn’t enchanted."
+"Fields of Summer","Plane - Moag",2,"Whenever a player casts a spell, that player may gain 2 life.","Whenever chaos ensues, you may gain 10 life."
+"Gavony","Plane - Innistrad",3,"All creatures have vigilance.","Whenever chaos ensues, creatures you control gain indestructible until end of turn."
+"Prahv","Plane - Ravnica",4,"If you cast a spell this turn, you can’t attack with creatures.\nIf you attacked with creatures this turn, you can’t cast spells.","Whenever chaos ensues, you gain life equal to the number of cards in your hand."
+"Takenuma","Plane - Kamigawa",5,"Whenever a creature leaves the battlefield, its controller draws a card.","Whenever chaos ensues, return target creature you control to its owner’s hand."
+"Tazeem","Plane - Zendikar",6,"Creatures can’t block.","Whenever chaos ensues, draw a card for each land you control."
+"The Great Forest","Plane - Lorwyn",7,"Each creature assigns combat damage equal to its toughness rather than its power.","Whenever chaos ensues, creatures you control get +0/+2 and gain trample until end of turn."
+"The Fourth Sphere","Plane - Phyrexia",8,"At the beginning of your upkeep, sacrifice a nonblack creature.","Whenever chaos ensues, create a 2/2 black Zombie creature token."
+"Undercity Reaches","Plane - Ravnica",9,"Whenever a creature deals combat damage to a player, its controller may draw a card.","Whenever chaos ensues, you have no maximum hand size for the rest of the game."
