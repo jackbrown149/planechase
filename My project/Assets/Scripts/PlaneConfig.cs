@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static System.TimeZoneInfo;
 
 public class PlaneConfig : MonoBehaviour
 {
     [SerializeField]
-    private Image cardImage, pwSymbol, chaosSymbol;
+    private Image cardImage, pwSymbol, chaosSymbol, outerBG;
     [SerializeField]
     private TMPro.TMP_Text title, subtitle, desc, chaos;
 
@@ -29,7 +30,7 @@ public class PlaneConfig : MonoBehaviour
             new Vector2(-999999,-999999)); //for now, but if we add a settings button we'll need this
         GameManager.Instance.SetPWTolerance(80);
 
-        canPlaneswalk = true;
+        canPlaneswalk = false;
 
         StartCoroutine(RequestDeckAfterDelay(3));
     }
@@ -44,6 +45,9 @@ public class PlaneConfig : MonoBehaviour
         DisplayCard();
 
         StartCoroutine(CloudsOut(planeTransitionTime));
+        yield return new WaitForSeconds(planeTransitionTime + 0.2f);
+        //brief uninteractable delay after clouds roll out
+        canPlaneswalk = true;
     }
 
     // Update is called once per frame
@@ -70,6 +74,8 @@ public class PlaneConfig : MonoBehaviour
         cardImage.sprite = planeBG[currentPlane.imageID];
         desc.text = currentPlane.planeText;
         chaos.text= currentPlane.chaosText;
+
+        outerBG.sprite = cardImage.sprite;
     }
 
     private IEnumerator PlaneswalkTransition(float transitionTime)
@@ -91,6 +97,7 @@ public class PlaneConfig : MonoBehaviour
         //brief uninteractable delay after clouds roll out
         canPlaneswalk = true;
         print("finished card transition");
+        Deck.Instance.PutOnBottom(prevPlane);
     }
 
     [Header("PlaneTransitionVariables")]

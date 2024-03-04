@@ -1,43 +1,85 @@
+﻿using Mirror;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
-public class Card
+public class Card : NetworkBehaviour
 {
-    public string title, subtitle, planeText, chaosText;
-    public byte imageID;
 
-    public Card(string title, string subtitle, byte imageID, string planeText, string chaosText)
+    public bool stackable = true;
+
+    [SyncVar]
+    public int cardId = -1;
+
+    public Sprite dungeon, oubliette, spell;
+
+    private CardUpdator updator;
+    private MeshRenderer renderer;
+
+    private void Start()
     {
-        this.title = title;
-        this.subtitle = subtitle;
-        this.imageID = imageID;
-        this.planeText = planeText;
-        this.chaosText = chaosText;
-        //this.imgLocal = imgLocal;
+        updator = GetComponentInChildren<CardUpdator>();
+        renderer = GetComponentInChildren<MeshRenderer>();
     }
 
-    public Card()
+    bool first = true;
+    private void Update()
     {
-
+        if (first)
+        {
+            first = false;
+            return;
+        }
+        if (cardId != -1)
+        {
+            UpdateCard(cardId);
+        }
     }
 
-    public void setTitle(string title)
-    { this.title = title; }
-    public string getTitle() { return this.title;}
+    public void UpdateCard(int id)
+    {
+        if (updator == null)
+        {
+            updator = GetComponentInChildren<CardUpdator>();
+            renderer = GetComponentInChildren<MeshRenderer>();
+        }
+        cardId = id;
+        updator.UpdateID(id);
 
-    public void setSubtitle(string subtitle)
-    { this.subtitle = subtitle; }
-    public string getSubtitle() { return this.subtitle; }
+        CardInfo info = CardManager.GetInfo(id);
+        var r = renderer.materials;
 
-    public void setImageID(byte imageID)
-    { this.imageID = imageID; }
-    public byte getImageID() { return this.imageID;}
+        if (info.type.Equals("Dungeon"))
+        {
+            r[0].mainTexture = dungeon.texture;
+        }
+        else if (info.type.Equals("Spell"))
+        {
+            r[0].mainTexture = spell.texture;
+        }
+        else
+        {
+            r[0].mainTexture = oubliette.texture;
+        }
 
-    public void setPlaneText(string planeText)
-    { this.planeText = planeText; }
-    public string getPlaneText() { return this.planeText;}
+        renderer.materials = r;
 
-    public void setChaosText(string chaosText)
-    { this.chaosText = chaosText; }
-    public string getChaosText() { return this.chaosText; }
+        //this.sprite = sprite;
+        //this.spriteId = id;
+        //MeshRenderer renderer = GetComponent<MeshRenderer>();
+        //var r = renderer.materials;
+
+        //r[0] = new Material(r[0]);
+        //r[0].color = Color.white;
+        //r[0].mainTexture = sprite.texture;
+
+        //renderer.materials = r;
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdDelete()
+    {
+        Destroy(gameObject);
+    }
+
 }
