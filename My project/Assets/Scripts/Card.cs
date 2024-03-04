@@ -1,85 +1,43 @@
-﻿using Mirror;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class Card : NetworkBehaviour
+public class Card
 {
+    public string title, subtitle, planeText, chaosText;
+    public byte imageID;
 
-    public bool stackable = true;
-
-    [SyncVar]
-    public int cardId = -1;
-
-    public Sprite dungeon, oubliette, spell;
-
-    private CardUpdator updator;
-    private MeshRenderer renderer;
-
-    private void Start()
+    public Card(string title, string subtitle, byte imageID, string planeText, string chaosText)
     {
-        updator = GetComponentInChildren<CardUpdator>();
-        renderer = GetComponentInChildren<MeshRenderer>();
+        this.title = title;
+        this.subtitle = subtitle;
+        this.imageID = imageID;
+        this.planeText = planeText;
+        this.chaosText = chaosText;
+        //this.imgLocal = imgLocal;
     }
 
-    bool first = true;
-    private void Update()
+    public Card()
     {
-        if (first)
-        {
-            first = false;
-            return;
-        }
-        if (cardId != -1)
-        {
-            UpdateCard(cardId);
-        }
+
     }
 
-    public void UpdateCard(int id)
-    {
-        if (updator == null)
-        {
-            updator = GetComponentInChildren<CardUpdator>();
-            renderer = GetComponentInChildren<MeshRenderer>();
-        }
-        cardId = id;
-        updator.UpdateID(id);
+    public void setTitle(string title)
+    { this.title = title; }
+    public string getTitle() { return this.title; }
 
-        CardInfo info = CardManager.GetInfo(id);
-        var r = renderer.materials;
+    public void setSubtitle(string subtitle)
+    { this.subtitle = subtitle; }
+    public string getSubtitle() { return this.subtitle; }
 
-        if (info.type.Equals("Dungeon"))
-        {
-            r[0].mainTexture = dungeon.texture;
-        }
-        else if (info.type.Equals("Spell"))
-        {
-            r[0].mainTexture = spell.texture;
-        }
-        else
-        {
-            r[0].mainTexture = oubliette.texture;
-        }
+    public void setImageID(byte imageID)
+    { this.imageID = imageID; }
+    public byte getImageID() { return this.imageID; }
 
-        renderer.materials = r;
+    public void setPlaneText(string planeText)
+    { this.planeText = planeText; }
+    public string getPlaneText() { return this.planeText; }
 
-        //this.sprite = sprite;
-        //this.spriteId = id;
-        //MeshRenderer renderer = GetComponent<MeshRenderer>();
-        //var r = renderer.materials;
-
-        //r[0] = new Material(r[0]);
-        //r[0].color = Color.white;
-        //r[0].mainTexture = sprite.texture;
-
-        //renderer.materials = r;
-    }
-
-    [Command(requiresAuthority = false)]
-    public void CmdDelete()
-    {
-        Destroy(gameObject);
-    }
-
+    public void setChaosText(string chaosText)
+    { this.chaosText = chaosText; }
+    public string getChaosText() { return this.chaosText; }
 }
