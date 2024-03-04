@@ -42,7 +42,12 @@ public class PlaneMaker : MonoBehaviour
     public void SaveCard()
     {
         newPlane = new Card(title.text, subtitle.text, imageID, desc.text, chaos.text);
-
+        using (var stream = File.Open("DefaultDeck.csv", FileMode.Append))
+        using (var writer = new StreamWriter(stream))
+        using (var csv = new CsvWriter(writer, config))
+        {
+            csv.WriteRecords(newPlane);
+        }
     }
     
 }
