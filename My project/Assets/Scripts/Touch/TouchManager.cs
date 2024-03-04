@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class TouchManager : MonoBehaviour
 {
@@ -42,7 +43,7 @@ public class TouchManager : MonoBehaviour
 
         if(Vector2.Distance(settingsPos, pos)<settingsTolerance)
         {
-            //they pressed settings
+            SceneManager.LoadScene(1);
         }
         else if(Vector2.Distance(pwPos, pos) < pwTolerance)
         {
