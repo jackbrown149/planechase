@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlaneMaker : MonoBehaviour
@@ -43,6 +44,11 @@ public class PlaneMaker : MonoBehaviour
     {
         newPlane = new Card(title.text, subtitle.text, imageID, desc.text, chaos.text);
 
+    }
+
+    public void ReturnToGame()
+    {
+        SceneManager.LoadScene(0);
     }
     
 }
