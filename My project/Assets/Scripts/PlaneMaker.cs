@@ -1,8 +1,5 @@
-using CsvHelper;
-using CsvHelper.Configuration;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -45,9 +42,11 @@ public class PlaneMaker : MonoBehaviour
 
     public void SaveCard()
     {
-        newPlane = new List<Card>
+        newPlane = new Card(title.text, subtitle.text, imageID, desc.text, chaos.text);
+
+        newPlaneRecord = new List<Card>
         {
-            new Card {title = title.text, subtitle = subtitle.text, imageID = imageID, planeText = desc.text, chaosText = chaos.text},
+            newPlane,
         };
 
         var config = new CsvConfiguration(CultureInfo.InvariantCulture)
