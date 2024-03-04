@@ -45,7 +45,11 @@ public class PlaneMaker : MonoBehaviour
 
     public void SaveCard()
     {
-        newPlane = new Card(title.text, subtitle.text, imageID, desc.text, chaos.text);
+        newPlane = new List<Card>
+        {
+            new Card {title = title.text, subtitle = subtitle.text, imageID = imageID, planeText = desc.text, chaosText = chaos.text},
+        };
+
         var config = new CsvConfiguration(CultureInfo.InvariantCulture)
         {
             HasHeaderRecord = false,
