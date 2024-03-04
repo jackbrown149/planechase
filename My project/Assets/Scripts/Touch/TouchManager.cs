@@ -43,7 +43,7 @@ public class TouchManager : MonoBehaviour
 
         if(Vector2.Distance(settingsPos, pos)<settingsTolerance)
         {
-            SceneManager.LoadScene(1);
+            //SceneManager.LoadScene(1);
         }
         else if(Vector2.Distance(pwPos, pos) < pwTolerance)
         {
