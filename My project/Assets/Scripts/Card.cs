@@ -21,6 +21,11 @@ public class Card
 
     }
 
+    public override string ToString()
+    {
+        return $"\"{title}\",\"{subtitle}\",{imageID}\"{planeText}\",\"{chaosText}\"";
+    }
+
     public void setTitle(string title)
     { this.title = title; }
     public string getTitle() { return this.title; }

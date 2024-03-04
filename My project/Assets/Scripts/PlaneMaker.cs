@@ -2,6 +2,7 @@ using CsvHelper;
 using CsvHelper.Configuration;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -20,7 +21,7 @@ public class PlaneMaker : MonoBehaviour
 
     [Header("Deck and Cards")]
     [SerializeField]
-    private Card newPlane;
+    private List<Card> newPlane;
 
 
     private void Start()
