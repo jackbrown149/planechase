@@ -23,7 +23,7 @@ public class Card
 
     public override string ToString()
     {
-        return $"\"{title}\",\"{subtitle}\",{imageID}\"{planeText}\",\"{chaosText}\"";
+        return $"\"{title}\",\"{subtitle}\",{imageID},\"{planeText}\",\"{chaosText}\"";
     }
 
     public void setTitle(string title)

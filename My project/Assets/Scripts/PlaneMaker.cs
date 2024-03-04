@@ -1,5 +1,9 @@
+using CsvHelper;
+using CsvHelper.Configuration;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -43,12 +47,10 @@ public class PlaneMaker : MonoBehaviour
     public void SaveCard()
     {
         newPlane = new Card(title.text, subtitle.text, imageID, desc.text, chaos.text);
-
-        newPlaneRecord = new List<Card>
+        List<Card> newPlaneRecord = new List<Card>
         {
             newPlane,
         };
-
         var config = new CsvConfiguration(CultureInfo.InvariantCulture)
         {
             HasHeaderRecord = false,
@@ -56,10 +58,14 @@ public class PlaneMaker : MonoBehaviour
 
         using (var stream = File.Open("DefaultDeck.csv", FileMode.Append))
         using (var writer = new StreamWriter(stream))
-        using (var csv = new CsvWriter(writer, config))
         {
-            csv.WriteRecords(newPlane);
+            print(newPlane.ToString());
+            writer.Write(newPlane.ToString());
         }
+        //using (var csv = new CsvWriter(writer, config))
+        //{
+        //    csv.WriteRecords(newPlaneRecord);
+        //}
     }
 
     public void ReturnToGame()
