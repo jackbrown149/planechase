@@ -1,9 +1,11 @@
 using CsvHelper;
 using CsvHelper.Configuration;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -47,24 +49,38 @@ public class PlaneMaker : MonoBehaviour
     public void SaveCard()
     {
         newPlane = new Card(title.text, subtitle.text, imageID, desc.text, chaos.text);
-        List<Card> newPlaneRecord = new List<Card>
-        {
-            newPlane,
-        };
-        var config = new CsvConfiguration(CultureInfo.InvariantCulture)
-        {
-            HasHeaderRecord = false,
-        };
 
-        using (var stream = File.Open("DefaultDeck.csv", FileMode.Append))
-        using (var writer = new StreamWriter(stream))
+        string newFileName = "./Assets/Scripts/DefaultDeck.csv";
+
+        string planeDetails = "\n"+ newPlane.ToString();
+
+        if (!File.Exists(newFileName))
         {
-            print(newPlane.ToString());
-            writer.Write(newPlane.ToString());
+            string clientHeader = "Client Name(ie. Billto_desc)" + "," + "Mid_id,billing number(ie billto_id)" + "," + "business unit id" + Environment.NewLine;
+
+            File.WriteAllText(newFileName, clientHeader);
         }
+
+        File.AppendAllText(newFileName, planeDetails);
+        
+
+
+        
+        //List<Card> newPlaneRecord = new List<Card>
+        //{
+        //    newPlane,
+        //};
+        //var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+        //{
+        //    HasHeaderRecord = false,
+        //};
+
+        //using (var stream = File.Open("DefaultDeck.csv", FileMode.Append))
+        //using (var writer = new StreamWriter(stream))
         //using (var csv = new CsvWriter(writer, config))
         //{
-        //    csv.WriteRecords(newPlaneRecord);
+        //    csv.WriteRecords(newPlaneRecord.AsEnumerable());
+        //    //csv.WriteField(newPlane.ToString(), false);
         //}
     }
 
